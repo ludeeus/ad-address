@@ -1,10 +1,11 @@
-## Requirements
-
-This app requires [`geopy`](https://pypi.org/project/geopy/) to be installed.
 
 This appends address information attributes based on the lat/long from a device tracker entity.
 
 ![example](https://raw.githubusercontent.com/ludeeus/ad-address/master/example.png)
+
+## Requirements
+
+This app requires [`geopy`](https://pypi.org/project/geopy/) to be installed.
 
 ## App configuration
 
