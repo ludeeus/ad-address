@@ -2,7 +2,7 @@
 
 _Address app for [AppDaemon](https://appdaemon.readthedocs.io/en/latest/)._
 
-This takes the lat/long from a device tracker entity and creates a new sensor that display the address of it.
+This appends address information attributes based on the lat/long from a device tracker entity.
 
 ![example](https://raw.githubusercontent.com/ludeeus/ad-address/master/example.png)
 
@@ -21,7 +21,6 @@ address:
   module: address
   class: Address
   entity: device_tracker.my_entity
-  name: sensor.my_device_address
 ```
 
 key | optional | type | default | description
@@ -29,4 +28,3 @@ key | optional | type | default | description
 `module` | False | string | | The module name of the app.
 `class` | False | string | | The name of the Class.
 `entity` | False | string | `device_tracker.my_entity`| entity_id of an device_tracker entity.
-`name` | False | string | `sensor.my_device_address`| entity_id of the new sensor.
