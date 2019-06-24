@@ -16,29 +16,38 @@ class Address(hass.Hass):
     def initialize(self):
         """initialize Address."""
         self.log("App started.")
-        self.listen_state(self.get_address, self.args["entity"])
-        self.log("State listener for {} started.".format(self.args["entity"]))
+        entity_config = self.args["entity"]
+
+        if isinstance(entity_config, str):
+            entities = []
+            entities.append(entity_config)
+        else:
+            entities = entity_config
+
+        for entity in entities:
+            self.listen_state(self.get_address, entity)
+            self.log("State listener for {} started.".format(entity))
 
     def get_address(self, entity, attribute, old, new, kwargs):
         """Set the state + attributes of a defined device_tracker entity."""
         from geopy.geocoders import Nominatim
         geo = Nominatim(user_agent="AppDaemon")
-        lat = self.get_state(entity=self.args["entity"], attribute="latitude")
-        long = self.get_state(entity=self.args["entity"], attribute="longitude")
+        lat = self.get_state(entity=entity, attribute="latitude")
+        long = self.get_state(entity=entity, attribute="longitude")
 
 
         if lat is None or long is None:
-            self.log("{} does not have lat/long attributes.".format(self.args["entity"]))
+            self.log("{} does not have lat/long attributes.".format(entity))
             return
 
         lat_long = "{}, {}".format(lat, long)
 
         data = geo.reverse(lat_long)
         raw = data.raw["address"]
-        attributes = self.get_state(entity=self.args["entity"], attribute="all")["attributes"]
+        attributes = self.get_state(entity=entity, attribute="all")["attributes"]
 
         for attr in raw:
             attributes[attr] = raw[attr]
 
-        self.log("Updating state for {}".format(self.args["entity"]))
-        self.set_state(self.args["entity"], attributes=attributes)
+        self.log("Updating state for {}".format(entity))
+        self.set_state(entity, attributes=attributes)
