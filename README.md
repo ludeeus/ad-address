@@ -2,6 +2,10 @@
 
 _Address app for [AppDaemon](https://appdaemon.readthedocs.io/en/latest/)._
 
+This takes the lat/long from a device tracker entity and creates a new sensor that display the address of it.
+
+![example](example.png)
+
 ## Installation
 
 Download the `address` directory from inside the `apps` directory here to your local `apps` directory, then add the configuration to enable the `address` module.
