@@ -2,6 +2,10 @@
 
 This app requires [`geopy`](https://pypi.org/project/geopy/) to be installed.
 
+This takes the lat/long from a device tracker entity and creates a new sensor that display the address of it.
+
+![example](https://raw.githubusercontent.com/ludeeus/ad-address/master/example.png)
+
 ## App configuration
 
 ```yaml

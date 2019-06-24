@@ -4,7 +4,7 @@ _Address app for [AppDaemon](https://appdaemon.readthedocs.io/en/latest/)._
 
 This takes the lat/long from a device tracker entity and creates a new sensor that display the address of it.
 
-![example](example.png)
+![example](https://raw.githubusercontent.com/ludeeus/ad-address/master/example.png)
 
 ## Installation
 
