@@ -32,9 +32,9 @@ class Address(hass.Hass):
         """Set the state + attributes of a defined device_tracker entity."""
         from geopy.geocoders import Nominatim
         geo = Nominatim(user_agent="AppDaemon")
-        lat = self.get_state(entity=entity, attribute="latitude")
-        long = self.get_state(entity=entity, attribute="longitude")
-
+        lat = self.get_state(entity, attribute="latitude")
+        long = self.get_state(entity, attribute="longitude")
+        state = self.get_state(entity)
 
         if lat is None or long is None:
             self.log("{} does not have lat/long attributes.".format(entity))
@@ -44,10 +44,10 @@ class Address(hass.Hass):
 
         data = geo.reverse(lat_long)
         raw = data.raw["address"]
-        attributes = self.get_state(entity=entity, attribute="all")["attributes"]
+        attributes = self.get_state(entity, attribute="all")["attributes"]
 
         for attr in raw:
             attributes[attr] = raw[attr]
 
         self.log("Updating state for {}".format(entity))
-        self.set_state(entity, attributes=attributes)
+        self.set_state(entity, state = state, attributes=attributes)
